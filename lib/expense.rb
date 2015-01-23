@@ -39,4 +39,24 @@ class Expense
             (category_id() == another_expense.category_id())
   end
 
+  define_method(:category) do
+
+    # below SELECT statement assumes one and only one row is returned
+    returned_categories = DB.exec(
+      "SELECT E.category_id" \
+      ", C.name " \
+      "FROM expenses E " \
+      "JOIN categories C " \
+      "ON E.category_id = C.id " \
+      "WHERE E.id = #{self.id()};")
+
+    returned_categories.each() do |category|
+      category_name = params.fetch("name")
+      category_id = params.fetch("category_id").to_i()
+      categories.push(Category.new({ :id => category_id, :name => category_name }))
+    end
+
+    categories
+  end
+
 end

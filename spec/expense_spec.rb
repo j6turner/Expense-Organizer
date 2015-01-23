@@ -19,7 +19,7 @@ describe(Expense) do
   end
 
   describe("#==") do
-    it("ensures two expenses with equal descriptions, amounts, " \
+    it("ensures two expenses with equal IDs, descriptions, amounts, " \
       "and dates are treated as equal") do
     expense1 = Expense.new({ :id => nil, :description => "groceries",
       :amount => 52.50, :date => "2015-01-22", :category_id => 3 })
@@ -72,7 +72,7 @@ describe(Expense) do
         Expense.new({ :id => nil, :description => "groceries",
           :amount => 52.50, :date => "2015-01-22", :category_id => 3 })
         expect(test_expense.category_id()).to(eq(3))
-      end
     end
+  end
 
 end
